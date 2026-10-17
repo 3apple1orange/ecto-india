@@ -1,0 +1,96 @@
+/* ---------- skip link ---------- */
+.skip { position: absolute; left: -999px; top: 8px; z-index: 100; background: var(--ink); color: #fff; padding: 10px 16px; border-radius: 8px; }
+.skip:focus { left: 12px; }
+
+/* ---------- nav ---------- */
+nav.top {
+  position: sticky; top: 0; z-index: 40;
+  padding-top: env(safe-area-inset-top, 0px);
+  background: rgba(255,255,255,.88);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid transparent; transition: border-color .2s;
+}
+nav.top.scrolled { border-bottom-color: var(--line); }
+.navbar { display: flex; align-items: center; justify-content: space-between; height: 72px; gap: 24px; }
+.logo { font-weight: 800; font-size: 30px; letter-spacing: -0.05em; text-decoration: none; line-height: 1; }
+.navlinks { display: flex; gap: 30px; font-size: 15px; }
+.navlinks a { text-decoration: none; color: var(--mute); transition: color .15s; }
+.navlinks a:hover { color: var(--ink); }
+.navcta { display: flex; gap: 10px; align-items: center; }
+
+/* ---------- hero ---------- */
+.hero { position: relative; padding: 72px 0 110px; overflow: hidden; }
+.herogrid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.25fr .9fr; gap: 56px; align-items: end; }
+.hero h1 { font-size: clamp(56px, 9.4vw, 148px); margin: 0; }
+.hero h1 .line { display: block; }
+.strike { position: relative; display: inline-block; color: var(--mute); }
+.strike::after {
+  content: ""; position: absolute; left: -4%; right: -4%; top: 52%; height: .09em;
+  background: var(--ink); transform: rotate(-3deg) scaleX(0); transform-origin: left;
+  animation: strike .7s .5s cubic-bezier(.7,0,.2,1) forwards;
+}
+@keyframes strike { to { transform: rotate(-3deg) scaleX(1); } }
+.stage {
+  display: inline-flex; align-items: center; gap: 10px; margin: 0 0 28px;
+  padding: 8px 16px; border-radius: 999px; background: var(--stone);
+  font-size: 14px; font-weight: 600;
+}
+.pulse { width: 10px; height: 10px; border-radius: 50%; background: var(--lime-deep); flex: none; animation: pulse 1.2s infinite; }
+@keyframes pulse { 50% { opacity: .25; } }
+.lede { max-width: 520px; font-size: 19px; color: var(--mute); margin: 30px 0 0; }
+.herometa { margin: 18px 0 0; font-size: 14px; color: var(--mute); }
+.herobg { position: absolute; inset: 0; z-index: 1; pointer-events: none; }
+.herobg svg { position: absolute; right: -6%; top: -40px; width: 68%; height: auto; opacity: .08; }
+
+/* ---------- waitlist card ---------- */
+.book { background: var(--paper); border: 1.5px solid var(--ink); border-radius: 28px; padding: 26px; box-shadow: 10px 10px 0 var(--lime); }
+.tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; background: var(--stone); border-radius: 999px; padding: 5px; margin-bottom: 22px; }
+.tab { height: 42px; border: 0; border-radius: 999px; background: transparent; font-weight: 600; font-size: 14px; cursor: pointer; color: var(--mute); transition: background .15s, color .15s; }
+.tab[aria-selected="true"] { background: var(--ink); color: #fff; }
+.cardtitle { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.15; margin: 0 0 16px; }
+
+.stops { border: 1px solid var(--line); border-radius: 18px; background: var(--stone); overflow: hidden; }
+.field { display: block; padding: 12px 18px; }
+.field + .field { border-top: 1px solid var(--line); }
+.field:focus-within { background: #fff; box-shadow: inset 3px 0 0 var(--ink); }
+.field label { display: block; font-size: 12px; color: var(--mute); line-height: 1.2; }
+.field input, .field select { border: 0; background: transparent; width: 100%; font-size: 17px; font-weight: 600; padding: 2px 0; outline: none; }
+.field select {
+  appearance: none; -webkit-appearance: none; cursor: pointer;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9' fill='none' stroke='%23000' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1 1l6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 2px center; padding-right: 26px;
+}
+
+.chips { border: 0; padding: 0; margin: 14px 0 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.chips legend { font-size: 12px; color: var(--mute); padding: 0; margin-bottom: 6px; float: left; width: 100%; }
+.chip { position: relative; }
+.chip input { position: absolute; opacity: 0; pointer-events: none; }
+.chip label { display: block; cursor: pointer; border: 1px solid var(--line); border-radius: 16px; padding: 12px 14px; font-weight: 600; font-size: 15px; text-align: center; transition: border-color .15s, background .15s; }
+.chip label:hover { border-color: var(--ink); }
+.chip input:checked + label { background: var(--lime); border-color: var(--ink); }
+.chip input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 2px; }
+
+.consent { display: flex; gap: 10px; align-items: flex-start; font-size: 13px; color: var(--mute); margin: 16px 0; line-height: 1.45; }
+.consent input { margin-top: 2px; width: 18px; height: 18px; accent-color: #000; flex: none; }
+.bookbtn { width: 100%; height: 56px; font-size: 16px; }
+.status { margin: 14px 0 0; min-height: 22px; font-size: 14px; color: var(--mute); }
+.status.err { color: #b3261e; font-weight: 600; }
+
+.success { padding: 28px 4px 12px; }
+.tick { width: 52px; height: 52px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; font-size: 24px; font-weight: 800; }
+.success h3 { margin: 18px 0 6px; font-size: 26px; letter-spacing: -0.02em; }
+.success p { margin: 0; color: var(--mute); }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .navlinks { display: none; }
+  .herogrid { grid-template-columns: 1fr; gap: 40px; }
+}
+@media (max-width: 640px) {
+  .navcta .ghost { display: none; }
+  .hero { padding: 48px 0 110px; }
+  .book { padding: 20px; box-shadow: 6px 6px 0 var(--lime); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .strike::after { transform: rotate(-3deg) scaleX(1); }
+}

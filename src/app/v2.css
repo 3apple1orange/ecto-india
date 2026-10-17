@@ -1,0 +1,79 @@
+/* =========================================================
+   v2: ride-type tiles, riders section, comparison line, form errors
+   ========================================================= */
+
+/* ---------- ride-type tiles (hero card) ---------- */
+.ridegrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin: 14px 0; }
+.ridetile { position: relative; }
+.ridetile input { position: absolute; opacity: 0; pointer-events: none; }
+.ridetile label,
+.ridetile .off {
+  position: relative; display: flex; flex-direction: column; gap: 2px; height: 100%;
+  border: 1px solid var(--line); border-radius: 16px; padding: 12px 10px 10px; background: #fff;
+}
+.ridetile label { cursor: pointer; transition: border-color .15s, background .15s; }
+.ridetile label:hover { border-color: var(--ink); }
+.ridetile input:checked + label { background: var(--lime); border-color: var(--ink); }
+.ridetile input:focus-visible + label { outline: 3px solid var(--ink); outline-offset: 2px; }
+.ridetile .ico { width: 40px; height: 22px; margin-bottom: 6px; color: var(--ink); }
+.ridetile b { font-size: 14px; line-height: 1.2; }
+.ridetile small { font-size: 12px; color: var(--mute); line-height: 1.3; }
+.ridetile input:checked + label small { color: var(--ink); opacity: .75; }
+
+.ridetile .off { background: var(--stone); color: #9a9e92; cursor: not-allowed; }
+.ridetile .off .ico { color: #b7bbae; }
+.ridetile .off b { text-decoration: line-through; text-decoration-thickness: 2px; }
+
+.rbadge {
+  position: absolute; top: 8px; right: 8px; width: 20px; height: 20px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 11px; font-weight: 800; line-height: 1;
+}
+.rbadge.yes { background: var(--ink); color: var(--lime); }
+.rbadge.no { background: #e6e7e0; color: #9a9e92; }
+
+@media (max-width: 460px) {
+  .ridegrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ---------- riders section (sheet, white) ---------- */
+.riders {
+  position: relative; z-index: 2; background: #fff;
+  border-radius: 56px 56px 0 0; margin-top: -56px; padding: 180px 0;
+}
+.ridersgrid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+.riders h2 { font-size: clamp(44px, 7vw, 110px); margin: 0; }
+.riders .lead { font-size: 19px; max-width: 44ch; margin: 26px 0 28px; color: var(--mute); }
+.riders .book { box-shadow: 10px 10px 0 var(--lime); }
+
+/* ---------- comparison line ---------- */
+.versus {
+  margin: 0 0 28px; padding: 14px 18px; max-width: 46ch;
+  border: 1.5px solid var(--ink); border-radius: 16px; background: #fff;
+  font-weight: 600; font-size: 16px; line-height: 1.45;
+}
+
+/* ---------- app section buttons ---------- */
+.appbtns { display: flex; gap: 12px; flex-wrap: wrap; }
+
+/* ---------- team: secondary link ---------- */
+.pbody .plink { margin-top: 10px; }
+
+/* ---------- form errors ---------- */
+.formerr {
+  margin: 0 0 14px; padding: 12px 14px; border-radius: 14px;
+  background: #fdecea; border: 1px solid #f1b8b2; color: #8a1c12;
+  font-size: 14px; font-weight: 600; line-height: 1.45;
+}
+.ferr { margin: 6px 0 0; font-size: 13px; font-weight: 600; line-height: 1.35; color: #b3261e; }
+.field.invalid { box-shadow: inset 3px 0 0 #b3261e; background: #fff; }
+.chips .ferr { grid-column: 1 / -1; margin-top: 0; }
+.chips[aria-invalid="true"] .chip label { border-color: #e3a29b; }
+.consent + .ferr { margin: -8px 0 14px 28px; }
+
+@media (max-width: 980px) {
+  .ridersgrid { grid-template-columns: 1fr; gap: 48px; }
+}
+@media (max-width: 640px) {
+  .riders { border-radius: 36px 36px 0 0; margin-top: -36px; padding: 110px 0; }
+  .riders .book { box-shadow: 6px 6px 0 var(--lime); }
+}

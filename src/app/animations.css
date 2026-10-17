@@ -1,0 +1,275 @@
+/* =========================================================
+   1. Page load + progress bar
+   ========================================================= */
+@keyframes rise { from { opacity: 0; transform: translateY(36px); } to { opacity: 1; transform: none; } }
+@keyframes navdrop { from { transform: translateY(-100%); } to { transform: none; } }
+
+nav.top { animation: navdrop .7s cubic-bezier(.2,.7,.2,1) both; }
+nav.top::after {
+  content: ""; position: absolute; left: 0; bottom: -1px; width: 100%; height: 3px;
+  background: var(--lime); transform-origin: left; transform: scaleX(var(--p, 0));
+}
+
+.hero .stage, .hero h1 .line, .hero .lede, .hero .herometa, .hero .book {
+  animation: rise .9s cubic-bezier(.2,.7,.2,1) both;
+}
+.hero .stage { animation-delay: .05s; }
+.hero h1 .line:nth-child(1) { animation-delay: .15s; }
+.hero h1 .line:nth-child(2) { animation-delay: .3s; }
+.hero .lede { animation-delay: .5s; }
+.hero .herometa { animation-delay: .6s; }
+.hero .book { animation-delay: .4s; }
+
+/* =========================================================
+   2. Hero booking card
+   ========================================================= */
+.asktitle { font-size: 15px; font-weight: 600; margin: 0 0 16px; color: var(--mute); }
+.heroform .stops { position: relative; }
+.stop { display: flex; align-items: center; gap: 14px; padding: 14px 64px 14px 18px; transition: background .15s; }
+.stop + .stop { border-top: 1px solid var(--line); }
+.stop:focus-within { background: #fff; }
+.stop .dot { width: 12px; height: 12px; border-radius: 50%; flex: none; background: var(--lime); box-shadow: 0 0 0 3px var(--ink) inset; }
+.stop .sq { width: 12px; height: 12px; flex: none; background: var(--ink); border-radius: 3px; }
+.inwrap { flex: 1; min-width: 0; }
+.stop label { display: block; font-size: 12px; color: var(--mute); line-height: 1.2; }
+.stop input { border: 0; background: transparent; width: 100%; font-size: 17px; font-weight: 600; padding: 2px 0; outline: none; }
+.stop input::placeholder { color: #a3a79a; font-weight: 500; }
+.swap {
+  position: absolute; right: 12px; top: 50%; transform: translateY(-50%);
+  width: 38px; height: 38px; border-radius: 50%; border: 1.5px solid var(--ink);
+  background: #fff; cursor: pointer; display: grid; place-items: center; transition: transform .3s;
+}
+.swap:hover { transform: translateY(-50%) rotate(180deg); }
+
+.rideone { display: flex; align-items: center; gap: 14px; margin: 14px 0; padding: 14px 18px; border: 1px solid var(--ink); border-radius: 16px; background: var(--lime); }
+.rideone .ico { width: 48px; height: 26px; flex: none; animation: bob 2.4s ease-in-out infinite; }
+.rideone b { display: block; font-size: 16px; line-height: 1.2; }
+.rideone span { font-size: 13px; opacity: .75; }
+.rideone .chk { margin-left: auto; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-size: 13px; font-weight: 800; opacity: 1; }
+@keyframes bob { 50% { transform: translateY(-3px); } }
+
+.notice {
+  margin-top: 14px; padding: 14px 16px; border-radius: 16px; background: var(--lime);
+  border: 1.5px solid var(--ink); font-size: 14.5px; line-height: 1.45;
+  animation: noticeIn .5s cubic-bezier(.34,1.56,.64,1) both;
+}
+.notice a { font-weight: 700; text-underline-offset: 3px; }
+@keyframes noticeIn { from { opacity: 0; transform: translateY(10px) scale(.96); } to { opacity: 1; transform: none; } }
+
+/* =========================================================
+   3. Ticker strip (minimal, between hero and road)
+   ========================================================= */
+.marqwrap { position: relative; z-index: 3; background: var(--paper); border-block: 1px solid var(--line); pointer-events: none; }
+.marqin {
+  overflow: hidden; padding: 18px 0;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+}
+.track { display: flex; width: max-content; animation: marq 70s linear infinite; }
+.track span {
+  display: inline-flex; align-items: center; gap: 28px; padding-right: 28px; white-space: nowrap;
+  font-size: 14px; font-weight: 500; letter-spacing: .08em; text-transform: uppercase; color: var(--mute);
+}
+.track i { width: 4px; height: 4px; border-radius: 50%; background: #c4c7bc; flex: none; }
+@keyframes marq { to { transform: translateX(-50%); } }
+
+/* =========================================================
+   4. Stats band
+   ========================================================= */
+.stats { padding: 0 0 150px; }
+.statgrid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 2px solid var(--ink); }
+.stat { padding: 36px 24px 0 0; }
+.stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
+.stat .num { font-size: clamp(56px, 8vw, 120px); font-weight: 800; letter-spacing: -.05em; line-height: .9; font-variant-numeric: tabular-nums; }
+.stat p { margin: 14px 0 0; color: var(--mute); font-size: 15px; max-width: 22ch; }
+
+/* =========================================================
+   5. Overlapping "sheets" + parallax rings
+   ========================================================= */
+.cities, .mission, .drive, #team { position: relative; z-index: 2; border-radius: 56px 56px 0 0; margin-top: -56px; }
+#team { background: #fff; }
+.mission { padding-bottom: 40px; }
+.cities::after, .drive::after { content: none; }
+.ring { position: absolute; width: 620px; height: 620px; border-radius: 50%; border: 44px solid rgba(0,0,0,.06); pointer-events: none; z-index: 1; will-change: transform; }
+.cities .ring { right: -200px; top: -240px; }
+.drive .ring { right: -180px; bottom: -260px; }
+
+/* =========================================================
+   6. Road divider with a driving auto
+   ========================================================= */
+.roaddiv { position: relative; height: 170px; background: var(--road); overflow: hidden; }
+.lane {
+  position: absolute; left: 0; right: 0; top: 50%; height: 6px; margin-top: -3px;
+  background: repeating-linear-gradient(90deg, var(--lime) 0 44px, transparent 44px 88px);
+  animation: lane .9s linear infinite;
+}
+@keyframes lane { to { background-position: -88px 0; } }
+.rauto { position: absolute; top: calc(50% - 44px); left: 0; animation: drive 8s linear infinite; }
+@keyframes drive { from { transform: translateX(-140px); } to { transform: translateX(calc(100vw + 40px)); } }
+.bob { animation: bounce .45s ease-in-out infinite alternate; }
+@keyframes bounce { from { transform: translateY(0); } to { transform: translateY(-2.5px); } }
+
+/* =========================================================
+   7. Scroll reveals (tagged by ScrollFX)
+   ========================================================= */
+[data-fx] {
+  transition:
+    opacity .9s cubic-bezier(.2,.7,.2,1) calc(var(--i, 0) * 90ms),
+    transform .9s cubic-bezier(.2,.7,.2,1) calc(var(--i, 0) * 90ms),
+    clip-path 1s cubic-bezier(.2,.7,.2,1) calc(var(--i, 0) * 90ms);
+}
+[data-fx="up"]:not(.in)    { opacity: 0; transform: translateY(44px); }
+[data-fx="left"]:not(.in)  { opacity: 0; transform: translateX(-56px); }
+[data-fx="scale"]:not(.in) { opacity: 0; transform: scale(.9) translateY(30px); }
+[data-fx="pop"]:not(.in)   { opacity: 0; transform: translateY(40px) rotate(-8deg) scale(.7); }
+[data-fx="phone"]:not(.in) { opacity: 0; transform: translateY(90px) rotate(7deg); }
+[data-fx="pop"]            { transition-timing-function: cubic-bezier(.34,1.56,.64,1); }
+
+/* headings wipe in from a mask */
+[data-fx="mask"] { clip-path: inset(-20% -5% -20% -5%); }
+[data-fx="mask"]:not(.in) { clip-path: inset(0 0 100% 0); transform: translateY(.35em); }
+
+/* mission quote, word by word */
+.w { display: inline-block; }
+[data-fx="words"] .w {
+  transition:
+    opacity .7s ease calc(var(--i, 0) * 70ms),
+    transform .8s cubic-bezier(.2,.7,.2,1) calc(var(--i, 0) * 70ms);
+}
+[data-fx="words"]:not(.in) .w { opacity: 0; transform: translateY(.7em); }
+
+/* principle badges spin in, then wobble on hover */
+.safe .badge { transition: transform .8s cubic-bezier(.34,1.56,.64,1) .25s; }
+[data-fx]:not(.in) .badge { transform: rotate(-120deg) scale(.4); }
+.safe:hover .badge { transform: rotate(-8deg) scale(1.08); transition-delay: 0s; }
+
+/* city names lift on hover */
+.citylist li { cursor: default; transition: transform .25s cubic-bezier(.34,1.56,.64,1); }
+.citylist li:hover { transform: translateY(-6px) rotate(-2deg); }
+
+/* =========================================================
+   8. Responsive
+   ========================================================= */
+@media (max-width: 980px) {
+  .statgrid { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stat:nth-child(n+3) { margin-top: 32px; }
+}
+@media (max-width: 640px) {
+  .cities, .mission, .drive, #team { border-radius: 36px 36px 0 0; margin-top: -36px; }
+  .stats { padding-bottom: 100px; }
+  .roaddiv { height: 140px; }
+  .rideone span { font-size: 12px; }
+}
+
+/* =========================================================
+   9. Reduced motion
+   ========================================================= */
+@media (prefers-reduced-motion: reduce) {
+  .track, .lane, .rauto, .bob, .rideone .ico { animation: none !important; }
+  .rauto { left: 40%; }
+  nav.top { animation: none; }
+}
+
+/* =========================================================
+   10. Mission: photo on the right (or centered quote without one)
+   ========================================================= */
+.missiongrid { display: grid; grid-template-columns: 1.15fr .85fr; gap: 64px; align-items: center; }
+.mission blockquote { max-width: none; }
+
+.missphoto { margin: 0; }
+.missphoto .frame {
+  position: relative; aspect-ratio: 4 / 5; width: 100%; max-width: 440px; margin-left: auto;
+  border-radius: 28px; overflow: hidden; background: #2a3a30;
+  box-shadow: 10px 10px 0 var(--lime);
+}
+.missphoto figcaption { max-width: 440px; margin: 18px 0 0 auto; font-size: 14px; color: #b9c8a8; }
+
+/* no photo yet: centered quote, no empty side */
+.missiongrid.solo { grid-template-columns: 1fr; text-align: center; }
+.missiongrid.solo blockquote { margin-inline: auto; max-width: 20ch; }
+
+@media (max-width: 980px) {
+  .missiongrid { grid-template-columns: 1fr; gap: 48px; }
+  .missphoto .frame, .missphoto figcaption { margin-inline: auto; max-width: 380px; }
+}
+@media (max-width: 640px) {
+  .missphoto .frame { box-shadow: 6px 6px 0 var(--lime); }
+}
+
+/* =========================================================
+   11. Brand film
+   ========================================================= */
+.film { padding: 100px 0 40px; background: var(--paper); }
+.filmframe {
+  position: relative; max-width: 1040px; margin: 0 auto; aspect-ratio: 16 / 9;
+  border: 1.5px solid var(--ink); border-radius: 28px; overflow: hidden;
+  background: #fff; box-shadow: 10px 10px 0 var(--lime);
+}
+.filmframe video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.filmbtn {
+  position: absolute; right: 16px; bottom: 16px; width: 44px; height: 44px; border-radius: 50%;
+  border: 1.5px solid var(--ink); background: var(--lime); font-size: 14px; cursor: pointer;
+  display: grid; place-items: center; transition: transform .15s;
+}
+.filmbtn:hover { transform: scale(1.08); }
+.filmcap { max-width: 1040px; margin: 18px auto 0; font-size: 14px; color: var(--mute); }
+@media (max-width: 640px) {
+  .film { padding: 64px 0 24px; }
+  .filmframe { border-radius: 20px; box-shadow: 6px 6px 0 var(--lime); }
+}
+/* =========================================================
+   12. Team portraits
+   ========================================================= */
+.portrait {
+  width: 132px; height: 132px; border-radius: 28px; overflow: hidden;
+  border: 1.5px solid var(--ink); box-shadow: 6px 6px 0 var(--lime); background: var(--stone);
+}
+.portrait img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
+@media (max-width: 640px) {
+  .portrait { width: 112px; height: 112px; border-radius: 24px; }
+}
+
+/* =========================================================
+   12. Team cards (photo left, text right)
+   ========================================================= */
+.teamgrid { gap: 28px; align-items: stretch; }
+
+.person {
+  display: grid; grid-template-columns: 190px 1fr; gap: 28px; align-items: start;
+  padding: 24px; overflow: visible;
+  border: 1.5px solid var(--ink); border-radius: 28px; background: #fff;
+  box-shadow: 8px 8px 0 var(--lime);
+  transition: box-shadow .25s, transform .25s;
+}
+.person:hover { box-shadow: 12px 12px 0 var(--lime); transform: translate(-2px, -2px); }
+
+.pphoto {
+  position: relative; width: 190px; height: 240px; overflow: hidden;
+  border: 1.5px solid var(--ink); border-radius: 22px; background: var(--road);
+  box-shadow: 5px 5px 0 var(--lime);
+}
+.pphoto img { display: block; width: 100%; height: 100%; object-fit: cover; object-position: center 25%; }
+.pphoto .avatar {
+  width: 100%; height: 100%; border-radius: 0; font-size: 56px;
+  background: var(--road); color: var(--lime);
+}
+
+.pbody { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 0; min-width: 0; }
+.pbody .role { margin: 0; }
+.pbody h3 { margin: 4px 0 2px; font-size: clamp(26px, 2.6vw, 36px); letter-spacing: -0.03em; line-height: 1.05; }
+.pbody p { margin: 0; color: var(--mute); font-size: 16px; }
+.pbody p.role { color: var(--ink); }
+.pbody .plink { margin-top: 10px; padding-top: 0; }
+
+@media (max-width: 980px) {
+  .person { grid-template-columns: 170px 1fr; }
+  .pphoto { width: 170px; height: 220px; }
+}
+@media (max-width: 640px) {
+  .person { grid-template-columns: 1fr; gap: 20px; padding: 20px; border-radius: 24px; box-shadow: 6px 6px 0 var(--lime); }
+  .pphoto { width: 150px; height: 190px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .person:hover { transform: none; }
+}

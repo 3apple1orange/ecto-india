@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ECTO India website
 
-## Getting Started
+Next.js static export, hosted on Cloudflare Pages. Forms are handled by
+Cloudflare Pages Functions in `/functions` and sent with Resend.
 
-First, run the development server:
+## Develop
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+In development the rider and driver forms do not send anything. They log the
+sign-up to the browser console and show the success message.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build   # static site in /out
+```
 
-## Learn More
+## Cloudflare Pages settings
 
-To learn more about Next.js, take a look at the following resources:
+- Build command: `npm run build`
+- Build output directory: `out`
+- Production branch: `main`
+- Environment variable `NODE_VERSION`: `20` (or newer)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Variables and Secrets (production):
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+| Name | Value |
+|---|---|
+| `RESEND_API_KEY` | Resend API key (Secret) |
+| `CONTACT_TO_EMAIL` | `contact@ectoindia.com` |
+| `CONTACT_FROM_EMAIL` | `ECTO INDIA <noreply@ectoindia.com>` (only after the domain is verified in Resend) |
 
-## Deploy on Vercel
+Only the production branch is indexable by search engines. Preview builds
+are `noindex` (see `src/lib/env.ts`).
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Forms
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+| Form | Endpoint | Function |
+|---|---|---|
+| Early rider | `POST /api/rider` | `functions/api/rider.js` |
+| Driver early access | `POST /api/driver` | `functions/api/driver.js` |
+
+Validation rules live in `src/lib/leads.ts` and are repeated in each function.
+The city list is in `src/lib/site.ts`. Keep all three in sync.
+
+## Test functions locally (optional)
+
+```bash
+npm run build
+npx wrangler pages dev out
+```
+
+Put local keys in `.dev.vars` (git-ignored), same names as above.

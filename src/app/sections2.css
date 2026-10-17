@@ -1,0 +1,90 @@
+/* ---------- drive (lime) ---------- */
+.drive { background: var(--lime); padding: 180px 0; position: relative; overflow: hidden; }
+.drive::after {
+  content: ""; position: absolute; right: -180px; bottom: -260px; width: 620px; height: 620px;
+  border-radius: 50%; border: 44px solid rgba(0,0,0,.06); pointer-events: none;
+}
+.drivegrid { position: relative; z-index: 2; display: grid; grid-template-columns: 1.1fr 1fr; gap: 64px; align-items: center; }
+.drive h2 { font-size: clamp(44px, 7vw, 110px); margin: 0; }
+.drive .lead { font-size: 19px; max-width: 44ch; margin: 26px 0 28px; color: #1d2a0a; }
+.points { list-style: none; padding: 0; margin: 0; display: grid; gap: 12px; font-weight: 600; font-size: 17px; }
+.points li { display: flex; align-items: center; gap: 12px; }
+.tickdot { width: 28px; height: 28px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-size: 14px; font-weight: 800; flex: none; }
+.drive .book { box-shadow: 10px 10px 0 var(--ink); }
+
+/* ---------- team ---------- */
+.teamgrid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+.person { border: 1.5px solid var(--ink); border-radius: 28px; padding: 32px; background: #fff; display: flex; flex-direction: column; align-items: flex-start; gap: 12px; transition: box-shadow .2s, transform .2s; }
+.person:hover { box-shadow: 8px 8px 0 var(--lime); transform: translate(-2px, -2px); }
+.avatar { width: 72px; height: 72px; border-radius: 50%; background: var(--ink); color: var(--lime); display: grid; place-items: center; font-weight: 800; font-size: 26px; letter-spacing: -0.04em; }
+.person h3 { margin: 8px 0 0; font-size: 30px; letter-spacing: -0.03em; line-height: 1.05; }
+.person p { margin: 0; color: var(--mute); max-width: 48ch; }
+.person .role { color: var(--ink); font-weight: 600; background: var(--lime); padding: 2px 12px; border-radius: 999px; font-size: 14px; }
+.plink { margin-top: auto; padding-top: 8px; font-weight: 600; text-underline-offset: 4px; text-decoration-color: var(--lime); text-decoration-thickness: 3px; }
+
+/* ---------- app ---------- */
+.app { padding: 180px 0; border-top: 1px solid var(--line); }
+.appgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: center; }
+.app h2 { font-size: clamp(40px, 6vw, 84px); margin: 0; }
+.applede { color: var(--mute); font-size: 18px; max-width: 42ch; margin: 24px 0 32px; }
+.phonewrap { display: flex; justify-content: center; position: relative; }
+.phonewrap::before { content: ""; position: absolute; width: 78%; aspect-ratio: 1; border-radius: 50%; background: var(--lime); top: 50%; left: 50%; transform: translate(-50%, -50%); }
+.phone { position: relative; width: 280px; aspect-ratio: 9 / 19; background: #fff; border-radius: 46px; border: 10px solid var(--ink); box-shadow: 0 40px 80px rgba(0,0,0,.18); overflow: hidden; display: flex; flex-direction: column; }
+.phone .cam { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); width: 12px; height: 12px; border-radius: 50%; background: var(--ink); z-index: 2; }
+.phone .screen { position: relative; flex: 1; background: var(--stone); }
+
+/* ---------- faq ---------- */
+.faq { max-width: 860px; }
+.faq details { border-bottom: 1px solid var(--line); }
+.faq details:first-of-type { border-top: 2px solid var(--ink); }
+.faq summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 24px; padding: 26px 0; font-size: 21px; font-weight: 600; }
+.faq summary::-webkit-details-marker { display: none; }
+.faq .plus { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--ink); flex: none; position: relative; transition: transform .25s, background .25s; }
+.faq .plus::before, .faq .plus::after { content: ""; position: absolute; left: 50%; top: 50%; width: 12px; height: 2px; background: var(--ink); transform: translate(-50%, -50%); }
+.faq .plus::after { transform: translate(-50%, -50%) rotate(90deg); }
+.faq details[open] .plus { transform: rotate(45deg); background: var(--lime); }
+.faq details p { margin: 0 0 28px; color: var(--mute); max-width: 62ch; }
+.sechead p a { color: var(--ink); font-weight: 600; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+
+/* ---------- footer ---------- */
+footer { padding: 120px 0 40px; border-top: 1px solid var(--line); }
+.foot { display: grid; grid-template-columns: 2fr 1fr 1.4fr; gap: 32px; margin-bottom: 60px; }
+.foot h4 { font-size: 14px; color: var(--mute); font-weight: 500; margin: 0 0 14px; }
+.foot ul { list-style: none; padding: 0; margin: 0; display: grid; gap: 8px; }
+.foot a { text-decoration: none; }
+.foot a:hover { text-decoration: underline; text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 4px; }
+.foot .tag { font-size: 20px; max-width: 26ch; margin: 0; }
+.wordmark { font-weight: 800; font-stretch: 100%; letter-spacing: -0.06em; line-height: .8; font-size: clamp(120px, 27vw, 400px); margin: 0; overflow: hidden; }
+.wordmark span { color: var(--lime); }
+.legal { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; font-size: 13px; color: var(--mute); margin-top: 28px; }
+
+/* ---------- legal pages ---------- */
+.legalpage { padding: 72px 0 120px; }
+.prose { max-width: 760px; }
+.prose h1 { font-size: clamp(44px, 7vw, 88px); margin: 0 0 16px; }
+.prose h2 { font-size: 24px; letter-spacing: -0.02em; margin: 40px 0 8px; }
+.prose p { color: #2b2e27; margin: 0 0 14px; }
+.prose a { text-decoration-color: var(--lime); text-decoration-thickness: 3px; text-underline-offset: 4px; font-weight: 600; }
+.updated { color: var(--mute) !important; font-size: 14px; }
+.draftnote { background: #fff6d6; border: 1px solid #e8d48a; border-radius: 12px; padding: 12px 16px; font-size: 14px; }
+
+/* ---------- 404 ---------- */
+.notfound { padding: 140px 0; }
+.notfound h1 { font-size: clamp(64px, 14vw, 200px); margin: 10px 0 0; }
+.notfound .lede { margin-bottom: 28px; }
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px) {
+  .drivegrid, .appgrid { grid-template-columns: 1fr; gap: 48px; }
+  .teamgrid { grid-template-columns: 1fr; }
+  .foot { grid-template-columns: 1fr 1fr; }
+  .foot > div:first-child { grid-column: 1 / span 2; }
+}
+@media (max-width: 640px) {
+  .drive, .app { padding: 110px 0; }
+  footer { padding: 80px 0 32px; }
+  .drive .book { box-shadow: 6px 6px 0 var(--ink); }
+  .phone { width: 240px; }
+  .person { padding: 24px; }
+  .faq summary { font-size: 18px; }
+}
